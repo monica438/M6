@@ -1,5 +1,10 @@
 package com.project;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
 public class PR113sobreescriu {
 
     public static void main(String[] args) {
@@ -12,5 +17,13 @@ public class PR113sobreescriu {
 
     // Mètode que escriu les frases sobreescrivint el fitxer amb UTF-8 i línia en blanc final
     public static void escriureFrases(String camiFitxer) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(camiFitxer, StandardCharsets.UTF_8, false))) {
+            writer.write("I can only show you the door");
+            writer.newLine();
+            writer.write("You're the one that has to walk through it");
+            writer.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

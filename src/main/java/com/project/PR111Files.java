@@ -21,7 +21,7 @@ public class PR111Files {
         // Comprovo si la carpeta existeix, si no existeix la creo
         if (Files.notExists(carpeta)) {
             try {
-                Files.createDirectory(carpeta);
+                Files.createDirectories(carpeta);
             } catch (IOException e) {
                 System.err.println("Error creant la carpeta: " + e.getMessage());
                 return;
@@ -65,5 +65,20 @@ public class PR111Files {
             System.err.println("Error mostrant els arxius: " + e.getMessage());
         }
         
+        // Esborro el file1.txt
+        try {
+            Files.deleteIfExists(file1);
+        } catch (IOException e) {
+            System.err.println("Error esborrant 'file1.txt': " + e.getMessage());
+        }
+
+        //Torno a mostrar els arxius de la carpeta
+        try {
+            System.out.println("Els arxius de la carpeta després d'esborrar 'file1.txt' són:");
+            Files.list(carpeta).forEach(path -> System.out.println(path.getFileName()));
+        }
+        catch (Exception e) {
+            System.err.println("Error mostrant els arxius: " + e.getMessage());
+        }
     }
 }
